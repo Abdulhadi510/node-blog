@@ -1,26 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head.ejs') %>
-<body>
 
-    <%- include('./partials/nav.ejs') %>
+    <%- include('./partials/head.ejs') %>
 
-    <div class="blogs content">
-        <h2>All Blogs</h2>
+    <body>
 
-        <% if(blogs.length > 0) {
-            blogs.forEach(blog => { %>
-            <a class="single" href="/blogs/<%= blog._id %>">
-                <h3 class="title"><%= blog.title %></h3>
-                <p class="snippet"><%= blog.snippet  %></p>
-            </a>  
-        <%  })
-        } else { %>
-                <p>There are no blogs to display...</p>
-            <% } %>
-    </div>
+        <%- include('./partials/nav.ejs') %>
 
-    <%- include('./partials/footer.ejs') %>
-    
-</body>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Shop in style</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <% productsData.products.forEach(product => { %>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top w-50 mx-auto" src=<%= product.ProductThumb %> alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder"><%= product.ProductName %></h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-filll"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$20.00</span>
+                                    $<%= product.ProductPrice %>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-center gap-2">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/products/<%= product.ProductID %>">View Product</a></div>
+                                   <div class="text-center">
+                                        <form class="justify-content-center">
+                                            <button class="btn btn-outline-dark" type="submit">
+                                                <i class="bi-cart-fill me-1"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <% }); %>
+
+                </div>
+            </div>
+        </section>
+        
+        <%- include('./partials/footer.ejs') %>
+        
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
 </html>
